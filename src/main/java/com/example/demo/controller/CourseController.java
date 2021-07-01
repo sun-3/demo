@@ -1,4 +1,4 @@
-package com.example.demo.Controller;
+package com.example.demo.controller;
 
 
 import com.example.demo.entities.Course;
@@ -9,26 +9,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class MyController {
+@RequestMapping("/courses")
+public class CourseController {
 
     @Autowired
     private CourseService courseService;
 
-    @GetMapping("/home")
-    public String home(){
-        return "Course App";
-    }
 
-    @GetMapping("/courses")
+    @GetMapping
     public List<Course> getCourses(){
 
         return this.courseService.getCourses();
     }
-    @GetMapping("/courses/{courseId}")
+    @GetMapping("/{courseId}")
     public Course getCourse(@PathVariable String courseId){
         return this.courseService.getCourse(Long.parseLong(courseId));
     }
-    @PostMapping("/courses")
+    @PostMapping
     public Course addCourse(@RequestBody Course course){
         return this.courseService.addCourse(course);
     }
